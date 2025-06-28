@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Development Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    input, textarea, button {
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    #todo-section {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: #f4f4f4;
+      margin: 5px 0;
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Web Dev Practice</h1>
+  </header>
+
+  <div class="container">
+    <!-- Contact Form -->
+    <section>
+      <h2>Contact Us</h2>
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+    <!-- To-Do List -->
+    <section id="todo-section">
+      <h2>To-Do List</h2>
+      <input type="text" id="taskInput" placeholder="Enter a task">
+      <button onclick="addTask()">Add Task</button>
+      <ul id="taskList"></ul>
+    </section>
+  </div>
+
+  <script>
+    // Form validation
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!name || !email || !message || !email.includes('@')) {
+        alert('Please fill out all fields correctly.');
+        event.preventDefault();
+      } else {
+        alert('Form submitted successfully!');
+      }
+    });
+
+    // To-do list
+    function addTask() {
+      const input = document.getElementById('taskInput');
+      const task = input.value.trim();
+      if (task !== '') {
+        const li = document.createElement('li');
+        li.textContent = task;
+        li.onclick = () => li.remove();
+        document.getElementById('taskList').appendChild(li);
+        input.value = '';
+      }
+    }
+  </script>
+
+</body>
+</html>
